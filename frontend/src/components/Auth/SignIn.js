@@ -9,12 +9,11 @@ const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
   const handleSignIn = async (e) => {
     e.preventDefault();
-
+  
     const user = { username, password };
-
+  
     try {
       const response = await fetch('http://localhost:4000/login', {
         method: 'POST',
@@ -23,10 +22,14 @@ const SignIn = () => {
         },
         body: JSON.stringify(user)
       });
-
+  
       if (response.ok) {
         const data = await response.json();
+        // Simpan token dan username ke localStorage
         localStorage.setItem('token', data.token);
+        localStorage.setItem('username', user.username); // Pastikan nama pengguna disimpan
+  
+        // Redirect ke halaman CoffeeList
         navigate('/');
       } else {
         const errorData = await response.json();
@@ -36,6 +39,33 @@ const SignIn = () => {
       setError('Failed to sign in. Please try again.');
     }
   };
+
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+
+  //   const user = { username, password };
+
+  //   try {
+  //     const response = await fetch('http://localhost:4000/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(user)
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       localStorage.setItem('token', data.token);
+  //       navigate('/');
+  //     } else {
+  //       const errorData = await response.json();
+  //       setError(errorData.message || 'Failed to sign in');
+  //     }
+  //   } catch (error) {
+  //     setError('Failed to sign in. Please try again.');
+  //   }
+  // };
 
   return (
     <Flex 

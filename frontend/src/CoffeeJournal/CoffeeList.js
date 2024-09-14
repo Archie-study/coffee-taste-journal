@@ -1,34 +1,19 @@
 import React from 'react';
-import { Button, Box, Heading } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Heading, Text } from '@chakra-ui/react';
+import Header from '../components/Header'; // Import komponen Header
 
 const CoffeeList = () => {
-  const navigate = useNavigate();
-
-  // Fungsi untuk menangani logout
-  const handleLogout = () => {
-    // Hapus token dari localStorage
-    localStorage.removeItem('token');
-
-    // Redirect ke halaman SignIn
-    navigate('/signin');
-  };
-
   return (
     <Box>
-      <Heading>Coffee Taste Journal</Heading>
-      {/* Konten Coffee List */}
-      
-      {/* Tombol Logout */}
-      <Button
-        onClick={handleLogout}
-        backgroundColor="#753D2A"
-        _hover={{ backgroundColor: "#3B2117" }}
-        color="white"
-        mt={4}
-      >
-        Logout
-      </Button>
+      {/* Tambahkan Header */}
+      <Header />
+
+      {/* Konten Halaman CoffeeList */}
+      <Box p={8}>
+        <Heading size="lg">Welcome to Coffee Taste Journal</Heading>
+        <Text mt={4}>Here is the list of your coffee tastings...</Text>
+        {/* Daftar Coffee List bisa ditambahkan di sini */}
+      </Box>
     </Box>
   );
 };
